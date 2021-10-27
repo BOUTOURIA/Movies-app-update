@@ -1,9 +1,17 @@
-const MovieCard = (props) => {
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+const MovieCard = (props, movies) => {
     const movie = props.movie;
+    const description = movies.description
     return (
       <div className="container">
         <div className="img">
-          <img src={movie.posterURL} alt="" />
+          <Router>
+             <Link to= '/description' component={movies.description} >
+                 <img src={movie.posterURL} alt=""/>
+          </Link>
+          <Link to='/'><button>Back</button></Link>
+          </Router>
         </div>
         <div className="info">
           <h2>{movie.title}</h2>

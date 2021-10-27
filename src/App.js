@@ -1,7 +1,9 @@
 import "./App.css";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { useState } from "react";
 import MovieList from "./Components/MovieList";
 import Filter from "./Components/Filter";
+import Header from "./Components/Header";
 
 function App() {
   const [movies, setMovies] = useState([
@@ -64,6 +66,11 @@ function App() {
 
   return (
     <div className="App">
+      <Router>
+        <Header/>
+        <Route path='/' exact component= {App} link to = 'app.js'/>
+        <Route path='Filter' component = {Filter}/>
+        <Route path='MovieList' component = {MovieList} />
       <div className="new-movie">
         <div className="input-group">
           <label>Title: </label>
@@ -90,22 +97,28 @@ function App() {
           />
         </div>
         <div className="input-group">
+          <Link to='/Description' component={movies.description} >
           <label>Image: </label>
           <input
             type="text"
             value={posterURL}
             onChange={(e) => setPosterUrl(e.target.value)}
+            
           />
+          </Link>
         </div>
 
         <button className="add-movie" onClick={addMovie}>
           Add Movie
         </button>
+       
       </div>
       <div className="list">
+              
         <Filter onChange={filterHandler} />
         <MovieList movies={filtredMovies} />
       </div>
+      </Router>
     </div>
   );
 }
